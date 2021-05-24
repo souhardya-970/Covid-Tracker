@@ -1,0 +1,41 @@
+html {
+  scroll-behavior: smooth;
+}
+.World,
+.India,
+.States {
+  padding: 8rem;
+}
+div.header h1 {
+  font-size: 7em;
+}
+.India h2,
+.World h2 {
+  font-size: 2em;
+}
+div h2 {
+  font-size: 1em;
+}
+div.about p {
+  padding: 0.5em;
+  font-size: 1.5em;
+}
+
+.about .container {
+  /* background-color: rgb(42, 118, 218); */
+  color: white;
+}
+.stateTable {
+  padding: 2rem;
+}
+.cases,
+.active_cases,
+.new_cases {
+  color: blueviolet;
+}
+.deaths {
+  color: red;
+}
+.recovered {
+  color: green;
+}
