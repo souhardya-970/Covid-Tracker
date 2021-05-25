@@ -1,20 +1,7 @@
 html {
   scroll-behavior: smooth;
 }
-.theme-light {
-  --color-primary: white;
-  --color-secondary: blueviolet;
-  --font-color: black;
-}
-.theme-dark {
-  --color-primary: #120136;
-  --color-secondary: #191970;
-  --font-color: white;
-}
-body {
-  background-color: var(--color-primary);
-  color: var(--font-color);
-}
+
 .World,
 .India,
 .States {
@@ -37,7 +24,7 @@ div.about p {
 
 .about .container {
   /* background-color: rgb(42, 118, 218); */
-  background-color: var(--color-secondary);
+  background-color: #191970;
   color: white;
 }
 .stateTable {
@@ -53,4 +40,8 @@ div.about p {
 }
 .recovered {
   color: green;
+}
+body {
+  background-color: #120136;
+  color: white;
 }
