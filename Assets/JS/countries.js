@@ -57,3 +57,27 @@ fetch("https://corona-virus-world-and-india-data.p.rapidapi.com/api", {
 .catch(err => {
 	console.error(err);
 });
+function setTheme(themeName) {
+    localStorage.setItem('theme', themeName);
+    document.documentElement.className = themeName;
+}
+function toggleTheme() {
+    tableTheme = document.getElementById("stateTable");
+   if (localStorage.getItem('theme') === 'theme-dark'){
+       setTheme('theme-light');
+       tableTheme.classList="table table-striped table-hover";
+   } else {
+       setTheme('theme-dark');
+       tableTheme.classList="table table-dark table-striped table-hover";
+   }
+   tableTheme = document.getElementById("stateTable");
+}
+(function () {
+   if (localStorage.getItem('theme') === 'theme-dark') {
+       setTheme('theme-dark');
+   } else {
+       setTheme('theme-light');
+   }
+})();
+toggle=document.getElementById("toggle");
+toggle.onclick = toggleTheme;
