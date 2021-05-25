@@ -13,7 +13,7 @@ fetch("https://corona-virus-world-and-india-data.p.rapidapi.com/api_india", {
         return;
 	}
 	response.json().then(function(data) {
-        console.log(data);
+        // console.log(data);
 		document.getElementById("state").innerHTML = data.state_wise["Andaman and Nicobar Islands"].state;
 		document.getElementById("confirmed").innerHTML = data.state_wise["Andaman and Nicobar Islands"].confirmed;
 		document.getElementById("active").innerHTML = data.state_wise["Andaman and Nicobar Islands"].active;
@@ -25,7 +25,7 @@ fetch("https://corona-virus-world-and-india-data.p.rapidapi.com/api_india", {
 				keyarray.push(`${key}`);
 			}
 		);
-		console.log(keyarray);
+		// console.log(keyarray);
 		for(let i=0; i<keyarray.length; i++){
 			let table = document.getElementById("stateTable");
 		    let row = table.insertRow(-1);
@@ -44,7 +44,7 @@ fetch("https://corona-virus-world-and-india-data.p.rapidapi.com/api_india", {
 		btn.onclick = function() {
 			let selectedOption = selectBox.options[selectBox.selectedIndex];
 			const selectedText = selectedOption.text;
-			console.log(selectedText);
+			// console.log(selectedText);
 			document.getElementById("state").innerHTML = data.state_wise[selectedText].state;
 			document.getElementById("confirmed").innerHTML = data.state_wise[selectedText].confirmed;
 			document.getElementById("active").innerHTML = data.state_wise[selectedText].active;
@@ -81,3 +81,55 @@ function toggleTheme() {
 })();
 toggle=document.getElementById("toggle");
 toggle.onclick = toggleTheme;
+
+const successCallback=(position)=>{
+    console.log(position);
+    let latitude  = position.coords.latitude;
+    let  longitude = position.coords.longitude;
+    // console.log(latitude);
+    // console.log(longitude);
+    reverseGeocoding(latitude, longitude);
+}
+
+const errorCallback=(error)=>{
+    console.log(error);
+}
+let loc= document.getElementById("location");
+loc.addEventListener('click', () => {
+    navigator.geolocation.getCurrentPosition(successCallback,errorCallback)
+});
+
+function reverseGeocoding(latitude, longitude) {
+	fetch(`http://api.positionstack.com/v1/reverse?access_key=6d6fcb31bc8d9af95ecb0a5fac2c2614&query=${latitude},${longitude}`)
+  .then( res => res.json())
+  .then(response => {
+	console.log(response);
+	let state = response.data[0].region;
+	fetch("https://corona-virus-world-and-india-data.p.rapidapi.com/api_india", {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-key": "073d5d427bmsh66171dee6e5e823p106db8jsna035b2a3cec4",
+		"x-rapidapi-host": "corona-virus-world-and-india-data.p.rapidapi.com"
+	}
+})
+.then(
+	function(response){
+		if (response.status !== 200) {
+        console.log('Looks like there was a problem. Status Code: ' +
+          response.status);
+        return;
+	}
+	response.json().then(function(data) {
+		document.getElementById("state").innerHTML = data.state_wise[state].state;
+		document.getElementById("confirmed").innerHTML = data.state_wise[state].confirmed;
+		document.getElementById("active").innerHTML = data.state_wise[state].active;
+		document.getElementById("recovered").innerHTML = data.state_wise[state].recovered;
+		document.getElementById("deaths").innerHTML = data.state_wise[state].deaths;
+      });
+    }
+)
+.catch(err => {
+	console.error(err);
+});
+  });
+}
