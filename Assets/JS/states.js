@@ -19,6 +19,7 @@ fetch("https://corona-virus-world-and-india-data.p.rapidapi.com/api_india", {
 		document.getElementById("active").innerHTML = data.state_wise["Andaman and Nicobar Islands"].active;
 		document.getElementById("recovered").innerHTML = data.state_wise["Andaman and Nicobar Islands"].recovered;
 		document.getElementById("deaths").innerHTML = data.state_wise["Andaman and Nicobar Islands"].deaths;
+		console.log(data);
 		const btn = document.getElementById("select");
 		const keyarray = [];
 		Object.entries(data.state_wise).forEach(([key, value]) => {
@@ -66,9 +67,11 @@ function toggleTheme() {
    if (localStorage.getItem('theme') === 'theme-dark'){
        setTheme('theme-light');
        tableTheme.classList="table table-striped table-hover";
+	   document.getElementById("selectBox").classList="form-control";
    } else {
        setTheme('theme-dark');
        tableTheme.classList="table table-dark table-striped table-hover";
+	   document.getElementById("selectBox").classList="form-control bg-dark";
    }
    tableTheme = document.getElementById("stateTable");
 }

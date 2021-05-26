@@ -19,6 +19,8 @@ fetch("https://corona-virus-world-and-india-data.p.rapidapi.com/api", {
         document.getElementById("active").innerHTML = dataWorld.countries_stat[0].active_cases;
         document.getElementById("recovered").innerHTML = dataWorld.countries_stat[0].total_recovered;
         document.getElementById("deaths").innerHTML = dataWorld.countries_stat[0].deaths;
+        document.getElementById("alert").innerHTML = "High Risk";
+        document.getElementById("alert").style.color = "red";
 		const btn = document.getElementById("searchBtn");
         for(let i=0; i<dataWorld.countries_stat.length; i++) {
             let table = document.getElementById("stateTable");
@@ -42,12 +44,23 @@ fetch("https://corona-virus-world-and-india-data.p.rapidapi.com/api", {
             console.log(search);
             for(let i=0; i<dataWorld.countries_stat.length; i++){
                 // console.log(dataWorld.countries_stat[i].country_name);
-                if(dataWorld.countries_stat[i].country_name === search){
+                if(dataWorld.countries_stat[i].country_name.toUpperCase() === search.toUpperCase()){
                     document.getElementById("country").innerHTML = dataWorld.countries_stat[i].country_name;
                     document.getElementById("confirmed").innerHTML = dataWorld.countries_stat[i].cases;
                     document.getElementById("active").innerHTML = dataWorld.countries_stat[i].active_cases;
                     document.getElementById("recovered").innerHTML = dataWorld.countries_stat[i].total_recovered;
                     document.getElementById("deaths").innerHTML = dataWorld.countries_stat[i].deaths;
+                    console.log(i);
+                    if(i<=20){
+                        document.getElementById("alert").innerHTML = "High Risk";
+                        document.getElementById("alert").style.color = "red";
+                    } else if(i<=100){
+                        document.getElementById("alert").innerHTML = "Moderate Risk";
+                        document.getElementById("alert").style.color = "orange";
+                    } else {
+                        document.getElementById("alert").innerHTML = "Low Risk";
+                        document.getElementById("alert").style.color = "Green";
+                    }
                 }
             }
         }
@@ -61,14 +74,17 @@ function setTheme(themeName) {
     localStorage.setItem('theme', themeName);
     document.documentElement.className = themeName;
 }
+
 function toggleTheme() {
     tableTheme = document.getElementById("stateTable");
    if (localStorage.getItem('theme') === 'theme-dark'){
        setTheme('theme-light');
        tableTheme.classList="table table-striped table-hover";
+       document.getElementById("searchBox").classList="form-control";
    } else {
        setTheme('theme-dark');
        tableTheme.classList="table table-dark table-striped table-hover";
+       document.getElementById("searchBox").classList="form-control bg-dark";
    }
    tableTheme = document.getElementById("stateTable");
 }
