@@ -88,6 +88,20 @@ function toggleTheme() {
    }
    tableTheme = document.getElementById("stateTable");
 }
+function checkTheme() {
+  tableTheme = document.getElementById("stateTable");
+  if (localStorage.getItem("theme") === "theme-light") {
+    setTheme("theme-light");
+    tableTheme.classList = "table table-striped table-hover";
+    document.getElementById("searchBox").classList = "form-control";
+  } else {
+    setTheme("theme-dark");
+    tableTheme.classList = "table table-dark table-striped table-hover";
+    document.getElementById("searchBox").classList = "form-control bg-dark";
+  }
+  tableTheme = document.getElementById("stateTable");
+}
+window.onload = checkTheme;
 (function () {
    if (localStorage.getItem('theme') === 'theme-dark') {
        setTheme('theme-dark');

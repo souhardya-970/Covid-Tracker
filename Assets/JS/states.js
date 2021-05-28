@@ -62,6 +62,28 @@ function setTheme(themeName) {
     localStorage.setItem('theme', themeName);
     document.documentElement.className = themeName;
 }
+function checkTheme() {
+  tableTheme = document.getElementById("stateTable");
+  if (localStorage.getItem("theme") === "theme-light") {
+    setTheme("theme-light");
+    tableTheme.classList = "table table-striped table-hover";
+    document.getElementById("selectBox").classList = "form-control";
+  } else {
+    setTheme("theme-dark");
+    tableTheme.classList = "table table-dark table-striped table-hover";
+    document.getElementById("selectBox").classList = "form-control bg-dark";
+  }
+  tableTheme = document.getElementById("stateTable");
+}
+// checkTheme();
+window.onload = checkTheme;
+(function () {
+   if (localStorage.getItem('theme') === 'theme-dark') {
+       setTheme('theme-dark');
+   } else {
+       setTheme('theme-light');
+   }
+})();
 function toggleTheme() {
     tableTheme = document.getElementById("stateTable");
    if (localStorage.getItem('theme') === 'theme-dark'){
@@ -75,13 +97,6 @@ function toggleTheme() {
    }
    tableTheme = document.getElementById("stateTable");
 }
-(function () {
-   if (localStorage.getItem('theme') === 'theme-dark') {
-       setTheme('theme-dark');
-   } else {
-       setTheme('theme-light');
-   }
-})();
 toggle=document.getElementById("toggle");
 toggle.onclick = toggleTheme;
 
