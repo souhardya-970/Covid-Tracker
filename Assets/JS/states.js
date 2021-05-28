@@ -19,7 +19,7 @@ fetch("https://corona-virus-world-and-india-data.p.rapidapi.com/api_india", {
 		document.getElementById("active").innerHTML = data.state_wise["Andaman and Nicobar Islands"].active;
 		document.getElementById("recovered").innerHTML = data.state_wise["Andaman and Nicobar Islands"].recovered;
 		document.getElementById("deaths").innerHTML = data.state_wise["Andaman and Nicobar Islands"].deaths;
-		console.log(data);
+		// console.log(data);
 		const btn = document.getElementById("select");
 		const keyarray = [];
 		Object.entries(data.state_wise).forEach(([key, value]) => {
@@ -86,7 +86,7 @@ toggle=document.getElementById("toggle");
 toggle.onclick = toggleTheme;
 
 const successCallback=(position)=>{
-    console.log(position);
+    // console.log(position);
     let latitude  = position.coords.latitude;
     let  longitude = position.coords.longitude;
     // console.log(latitude);
@@ -106,7 +106,7 @@ function reverseGeocoding(latitude, longitude) {
 	fetch(`http://api.positionstack.com/v1/reverse?access_key=6d6fcb31bc8d9af95ecb0a5fac2c2614&query=${latitude},${longitude}`)
   .then( res => res.json())
   .then(response => {
-	console.log(response);
+	// console.log(response);
 	let state = response.data[0].region;
 	fetch("https://corona-virus-world-and-india-data.p.rapidapi.com/api_india", {
 	"method": "GET",

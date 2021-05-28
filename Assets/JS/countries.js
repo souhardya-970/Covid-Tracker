@@ -13,7 +13,7 @@ fetch("https://corona-virus-world-and-india-data.p.rapidapi.com/api", {
         return;
 	}
 	response_world.json().then(function(dataWorld) {
-        console.log(dataWorld);
+        // console.log(dataWorld);
         document.getElementById("country").innerHTML = dataWorld.countries_stat[0].country_name;
         document.getElementById("confirmed").innerHTML = dataWorld.countries_stat[0].cases;
         document.getElementById("active").innerHTML = dataWorld.countries_stat[0].active_cases;
@@ -41,7 +41,7 @@ fetch("https://corona-virus-world-and-india-data.p.rapidapi.com/api", {
 
         btn.onclick = function() {
             let search = document.getElementById("searchBox").value;
-            console.log(search);
+            // console.log(search);
             for(let i=0; i<dataWorld.countries_stat.length; i++){
                 // console.log(dataWorld.countries_stat[i].country_name);
                 if(dataWorld.countries_stat[i].country_name.toUpperCase() === search.toUpperCase()){

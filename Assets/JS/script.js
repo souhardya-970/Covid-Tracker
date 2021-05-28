@@ -13,18 +13,13 @@ fetch("https://corona-virus-world-and-india-data.p.rapidapi.com/api", {
         return;
 	}
 	response_world.json().then(function(dataWorld) {
-        console.log(dataWorld);
+        // console.log(dataWorld);
 		document.getElementById("world_cases").innerHTML = dataWorld.world_total.total_cases;
 		document.getElementById("active_cases").innerHTML = dataWorld.world_total.active_cases;
 		document.getElementById("new_cases").innerHTML = dataWorld.world_total.new_cases;
 		document.getElementById("total_deaths").innerHTML = dataWorld.world_total.total_deaths;
 		document.getElementById("new_deaths").innerHTML = dataWorld.world_total.new_deaths;
 		document.getElementById("total_recovered").innerHTML = dataWorld.world_total.total_recovered;
-		// for(let i=0; i<dataWorld.countries_stat.length; i++){
-		// 	if(countries_stat[i].country_name="India"){
-		// 		
-		// 	}
-		// }
 		document.getElementById("india_cases").innerHTML = dataWorld.countries_stat[1].cases;
 		document.getElementById("india_active_cases").innerHTML = dataWorld.countries_stat[1].active_cases;
 		document.getElementById("india_new_cases").innerHTML = dataWorld.countries_stat[1].new_cases;
@@ -38,17 +33,6 @@ fetch("https://corona-virus-world-and-india-data.p.rapidapi.com/api", {
 	console.error(err);
 });
 
-// toggle=document.getElementById("toggle");
-// toggle.addEventListener('click', () => {
-// 	const themeStyleSheet = document.getElementById("theme");
-// 	if(themeStyleSheet.href = "./styles.css"){
-// 		themeStyleSheet.href = "./dark_styles.css";
-// 		toggle.innerHTML = 'Light Mode';
-// 	} else {
-// 		themeStyleSheet.href = "./styles.css";
-// 		toggle.innerHTML = 'Dark Mode';
-// 	}
-// })
 function setTheme(themeName) {
     localStorage.setItem('theme', themeName);
     document.documentElement.className = themeName;
