@@ -118,12 +118,17 @@ loc.addEventListener('click', () => {
 });
 
 function reverseGeocoding(latitude, longitude) {
-	fetch(`http://api.positionstack.com/v1/reverse?access_key=6d6fcb31bc8d9af95ecb0a5fac2c2614&query=${latitude},${longitude}`)
-  .then( res => res.json())
-  .then(response => {
-	// console.log(response);
-	let state = response.data[0].region;
-	fetch("https://corona-virus-world-and-india-data.p.rapidapi.com/api_india", {
+var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "https://us1.locationiq.com/v1/reverse.php?key=pk.967442d5d1aaf6d015273a72465ee344&lat=" + latitude + "&lon=" + longitude + "&format=json",
+  "method": "GET"
+}
+
+$.ajax(settings).done(function (response) {
+//   console.log(response);
+  let state = response.address.state;
+  fetch("https://corona-virus-world-and-india-data.p.rapidapi.com/api_india", {
 	"method": "GET",
 	"headers": {
 		"x-rapidapi-key": "073d5d427bmsh66171dee6e5e823p106db8jsna035b2a3cec4",
